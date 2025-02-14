@@ -6,11 +6,11 @@
   },
   "frame": {
     "version": "1",
-    "name": "Example Frame - Test",
+    "name": "Farcaster.json Well known",
     "iconUrl": "https://frames-v2-privy-connection.vercel.app/next.svg",
-    "homeUrl": "https://frames-v2-privy-connection.vercel.app",
+    "homeUrl": "https://frames-v2-privy-connection.vercel.app/",
     "imageUrl": "https://frames-v2-privy-connection.vercel.app/opengraph-image.png",
-    "buttonTitle": "Check this out",
+    "buttonTitle": "Check this out fc.json",
     "splashImageUrl": "https://frames-v2-privy-connection.vercel.app/next.svg",
     "splashBackgroundColor": "#eeccff",
     "webhookUrl": "https://frames-v2-privy-connection.vercel.app/api/webhook"
