@@ -13,7 +13,7 @@ export async function GET() {
       name: 'Example Frame - Farcaster.json',
       iconUrl: 'https://frames-v2-privy-connection.vercel.app/logo.png',
       homeUrl: 'https://frames-v2-privy-connection.vercel.app',
-      imageUrl: 'https://frames-v2-privy-connection.vercel.app/opengraph-image',
+      imageUrl: 'https://frames-v2-privy-connection.vercel.app/pooh.jpeg',
       buttonTitle: 'Check this out - Farcaster.json',
       splashImageUrl: 'https://frames-v2-privy-connection.vercel.app/logo.png',
       splashBackgroundColor: '#f5f0ec',
