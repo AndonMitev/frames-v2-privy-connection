@@ -16,7 +16,8 @@ const geistMono = Geist_Mono({
   display: 'swap'
 });
 
-const url = 'https://frames-v2-privy-connection.vercel.app';
+// const url = 'https://frames-v2-privy-connection.vercel.app';
+const url = process.env.NEXT_PUBLIC_APP_URL;
 
 const frame = {
   version: 'next',
@@ -34,9 +35,10 @@ const frame = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(url as string),
   title: 'Frame.app - Web3 Wallet Connection',
   description: 'A modern web3 wallet connection interface',
-  authors: [{ name: 'Frame.app' }],
+  authors: [{ name: 'Frame.app-test' }],
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
   other: {
     'fc:frame': JSON.stringify(frame)

@@ -71,24 +71,38 @@ export default function FrameProvider({
   }, [ready, authenticated, frameContext]);
 
   // Create Embedded Wallet
+  // useEffect(() => {
+  //   if (
+  //     authenticated &&
+  //     ready &&
+  //     user &&
+  //     user.linkedAccounts.filter(
+  //       (account) =>
+  //         account.type === 'wallet' && account.walletClientType === 'privy'
+  //     ).length === 0
+  //   ) {
+  //     const generateWallet = async () => {
+  //       console.log('Creating embedded wallet');
+  //       const wallet = await createWallet();
+  //       console.log('Embedded wallet created', wallet);
+  //     };
+  //     generateWallet();
+  //   }
+  // }, [authenticated, ready, user]);
+
   useEffect(() => {
-    if (
-      authenticated &&
-      ready &&
-      user &&
-      user.linkedAccounts.filter(
-        (account) =>
-          account.type === 'wallet' && account.walletClientType === 'privy'
-      ).length === 0
-    ) {
-      const generateWallet = async () => {
-        console.log('Creating embedded wallet');
-        const wallet = await createWallet();
-        console.log('Embedded wallet created', wallet);
-      };
-      generateWallet();
+    if (!frameContext || !authenticated) {
+      return;
     }
-  }, [authenticated, ready, user]);
+
+    const addFrame = async () => {
+      await sdk.actions.addFrame();
+    };
+
+    if (!frameContext?.client.added) {
+      addFrame();
+    }
+  }, [frameContext, authenticated, ready, user]);
 
   return (
     <FrameContext.Provider value={{ isSDKLoaded, frameContext }}>
