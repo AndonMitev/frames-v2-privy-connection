@@ -5,7 +5,7 @@
     "signature": "MHgyYjlmZjNlNjM1M2Q2ZTNhZGFjYWVjZGZiYWNiNTMyNTFjMTg1MDM0NWM2ZTU1YzdjMDg4OTU1MWE2NjAyYzgyNjgwYWQwYTZkM2VjYzg0YWQ3ZWQyNzFkYmU0NDUwNjk5OWJiYWY4MzcwNzFlODc4NzRkMGI5OWY3ZjI1ZjdiMTFi"
   },
   "frame": {
-    "version": "1",
+    "version": "next",
     "name": "Farcaster.json Well known",
     "iconUrl": "https://frames-v2-privy-connection.vercel.app/next.svg",
     "homeUrl": "https://frames-v2-privy-connection.vercel.app/",
