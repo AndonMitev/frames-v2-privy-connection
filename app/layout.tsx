@@ -20,7 +20,7 @@ const url = 'https://frames-v2-privy-connection.vercel.app';
 
 const frame = {
   version: 'next',
-  imageUrl: `${url}/opengraph-image`,
+  imageUrl: `${url}/opengraph-image.png`,
   button: {
     title: 'Start',
     action: {
