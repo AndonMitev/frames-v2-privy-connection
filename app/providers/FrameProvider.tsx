@@ -30,7 +30,7 @@ export default function FrameProvider({
   const [frameContext, setFrameContext] = useState<Context.FrameContext | null>(
     null
   );
-  const { ready, authenticated, user } = usePrivy();
+  const { ready, authenticated, user, createWallet } = usePrivy();
   const { initLoginToFrame, loginToFrame } = useLoginToFrame();
 
   // Setup SDK
@@ -71,24 +71,24 @@ export default function FrameProvider({
   }, [ready, authenticated, frameContext]);
 
   // Create Embedded Wallet
-  // useEffect(() => {
-  //   if (
-  //     authenticated &&
-  //     ready &&
-  //     user &&
-  //     user.linkedAccounts.filter(
-  //       (account) =>
-  //         account.type === 'wallet' && account.walletClientType === 'privy'
-  //     ).length === 0
-  //   ) {
-  //     const generateWallet = async () => {
-  //       console.log('Creating embedded wallet');
-  //       const wallet = await createWallet();
-  //       console.log('Embedded wallet created', wallet);
-  //     };
-  //     generateWallet();
-  //   }
-  // }, [authenticated, ready, user]);
+  useEffect(() => {
+    if (
+      authenticated &&
+      ready &&
+      user &&
+      user.linkedAccounts.filter(
+        (account) =>
+          account.type === 'wallet' && account.walletClientType === 'privy'
+      ).length === 0
+    ) {
+      const generateWallet = async () => {
+        console.log('Creating embedded wallet');
+        const wallet = await createWallet();
+        console.log('Embedded wallet created', wallet);
+      };
+      generateWallet();
+    }
+  }, [authenticated, ready, user]);
 
   useEffect(() => {
     if (!frameContext || !authenticated) {
