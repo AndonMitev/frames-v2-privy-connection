@@ -28,7 +28,7 @@ const frame = {
       type: 'launch_frame',
       name: 'Frame.app',
       url: url,
-      splashImageUrl: `${url}/next.svg`,
+      splashImageUrl: `${url}/logo.png`,
       splashBackgroundColor: '#f5f0ec'
     }
   }
