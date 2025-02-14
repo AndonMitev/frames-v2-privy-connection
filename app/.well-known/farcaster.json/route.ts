@@ -10,7 +10,7 @@ export async function GET() {
     },
     frame: {
       version: 'next',
-      name: 'Example Frame - Farcaster.json',
+      name: 'Master metadata Cache?',
       iconUrl: 'https://frames-v2-privy-connection.vercel.app/pooh.jpeg',
       homeUrl: 'https://frames-v2-privy-connection.vercel.app',
       imageUrl: 'https://frames-v2-privy-connection.vercel.app/pooh.jpeg',
