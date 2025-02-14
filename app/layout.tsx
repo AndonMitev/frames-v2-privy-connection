@@ -16,11 +16,31 @@ const geistMono = Geist_Mono({
   display: 'swap'
 });
 
+const url = 'https://frames-v2-privy-connection.vercel.app';
+
+const frame = {
+  version: 'next',
+  imageUrl: `${url}/opengraph-image`,
+  button: {
+    title: 'Start',
+    action: {
+      type: 'launch_frame',
+      name: 'Frame.app',
+      url: url,
+      splashImageUrl: `${url}/next.svg`,
+      splashBackgroundColor: '#f5f0ec'
+    }
+  }
+};
+
 export const metadata: Metadata = {
   title: 'Frame.app - Web3 Wallet Connection',
   description: 'A modern web3 wallet connection interface',
   authors: [{ name: 'Frame.app' }],
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1'
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+  other: {
+    'fc:frame': JSON.stringify(frame)
+  }
 };
 
 export default function RootLayout({
