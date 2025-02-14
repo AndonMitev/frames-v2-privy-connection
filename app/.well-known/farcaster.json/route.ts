@@ -11,7 +11,7 @@ export async function GET() {
     frame: {
       version: 'next',
       name: 'Example Frame - Farcaster.json',
-      iconUrl: 'https://frames-v2-privy-connection.vercel.app/logo.png',
+      iconUrl: 'https://frames-v2-privy-connection.vercel.app/pooh.jpeg',
       homeUrl: 'https://frames-v2-privy-connection.vercel.app',
       imageUrl: 'https://frames-v2-privy-connection.vercel.app/pooh.jpeg',
       buttonTitle: 'Check this out - Farcaster.json',
