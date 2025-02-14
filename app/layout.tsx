@@ -21,7 +21,7 @@ const url = process.env.NEXT_PUBLIC_APP_URL;
 
 const frame = {
   version: 'next',
-  imageUrl: `${url}/opengraph-image.png`,
+  imageUrl: `${url}/logo.png`,
   button: {
     title: 'Start',
     action: {
