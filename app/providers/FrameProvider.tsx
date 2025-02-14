@@ -30,7 +30,7 @@ export default function FrameProvider({
   const [frameContext, setFrameContext] = useState<Context.FrameContext | null>(
     null
   );
-  const { ready, authenticated, user, createWallet } = usePrivy();
+  const { ready, authenticated, user } = usePrivy();
   const { initLoginToFrame, loginToFrame } = useLoginToFrame();
 
   // Setup SDK
