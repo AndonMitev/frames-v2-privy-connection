@@ -10,7 +10,7 @@ const FrameContext = createContext<{
   frameContext: Context.FrameContext | null;
 }>({
   isSDKLoaded: false,
-  frameContext: null
+  frameContext: null,
 });
 
 export const useFrameContext = () => {
@@ -22,13 +22,13 @@ export const useFrameContext = () => {
 };
 
 export default function FrameProvider({
-  children
+  children,
 }: {
   children: React.ReactNode;
 }) {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
   const [frameContext, setFrameContext] = useState<Context.FrameContext | null>(
-    null
+    null,
   );
   const { ready, authenticated, user, createWallet } = usePrivy();
   const { initLoginToFrame, loginToFrame } = useLoginToFrame();
@@ -62,7 +62,7 @@ export default function FrameProvider({
 
         await loginToFrame({
           message: result.message,
-          signature: result.signature
+          signature: result.signature,
         });
         console.log('Logged in to Frame');
       };
@@ -71,24 +71,24 @@ export default function FrameProvider({
   }, [ready, authenticated, frameContext]);
 
   // Create Embedded Wallet
-  useEffect(() => {
-    if (
-      authenticated &&
-      ready &&
-      user &&
-      user.linkedAccounts.filter(
-        (account) =>
-          account.type === 'wallet' && account.walletClientType === 'privy'
-      ).length === 0
-    ) {
-      const generateWallet = async () => {
-        console.log('Creating embedded wallet');
-        const wallet = await createWallet();
-        console.log('Embedded wallet created', wallet);
-      };
-      generateWallet();
-    }
-  }, [authenticated, ready, user]);
+  // useEffect(() => {
+  //   if (
+  //     authenticated &&
+  //     ready &&
+  //     user &&
+  //     user.linkedAccounts.filter(
+  //       (account) =>
+  //         account.type === 'wallet' && account.walletClientType === 'privy'
+  //     ).length === 0
+  //   ) {
+  //     const generateWallet = async () => {
+  //       console.log('Creating embedded wallet');
+  //       const wallet = await createWallet();
+  //       console.log('Embedded wallet created', wallet);
+  //     };
+  //     generateWallet();
+  //   }
+  // }, [authenticated, ready, user]);
 
   useEffect(() => {
     if (!frameContext || !authenticated) {

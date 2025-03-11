@@ -6,15 +6,35 @@ import { useAccount } from 'wagmi';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Wallet, Box, User, ExternalLink } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { logTokens } from '@/lib/actions';
 
 export default function Frame() {
+  const [authToken, setAuthToken] = useState<string>();
+  const [identityToken, setIdentityToken] = useState<string>();
+
   const { frameContext } = useFrameContext();
-  const { user } = usePrivy();
+  const { user, login } = usePrivy();
   const { address } = useAccount();
   const embeddedWallet = user?.linkedAccounts.filter(
     (account) =>
-      account.type === 'wallet' && account.walletClientType === 'privy'
+      account.type === 'wallet' && account.walletClientType === 'privy',
   );
+
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+
+    async function _logTokens() {
+      const { authToken, identityToken } = await logTokens();
+
+      setAuthToken(authToken);
+      setIdentityToken(identityToken);
+    }
+
+    _logTokens();
+  }, [user]);
 
   return (
     <div className='w-full max-w-7xl mx-auto bg-gradient-to-br from-zinc-900 via-black to-zinc-900 p-6 md:p-8'>
@@ -38,6 +58,15 @@ export default function Frame() {
             View detailed information about your wallet connection, Frame
             context, and user details
           </p>
+
+          {!frameContext && (
+            <button
+              onClick={() => login({ loginMethods: ['farcaster'] })}
+              className='mt-4 text-lg bg-sky-500 py-2 px-4 rounded-md text-white max-w-2xl mx-auto'
+            >
+              Login
+            </button>
+          )}
         </motion.div>
 
         {/* Cards Grid */}
@@ -67,6 +96,52 @@ export default function Frame() {
                   <pre className='rounded-lg bg-neutral-950/50 p-4 overflow-auto max-h-[280px] text-sm text-neutral-300 scrollbar-thin scrollbar-thumb-neutral-800 scrollbar-track-transparent'>
                     {JSON.stringify(frameContext, null, 2) || 'Not connected'}
                   </pre>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Access and Identity token */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            <Card className='group h-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-xl hover:bg-neutral-900/60 transition-all'>
+              <CardHeader>
+                <CardTitle className='flex items-center space-x-3'>
+                  <div className='p-2.5 rounded-lg bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500/20 transition-colors'>
+                    <Wallet className='w-5 h-5' />
+                  </div>
+                  <span className='bg-gradient-to-br from-neutral-100 to-neutral-400 bg-clip-text text-transparent'>
+                    Access and Identity Token
+                  </span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className='space-y-4'>
+                  {authToken ? (
+                    <div className='rounded-lg bg-neutral-950/50 p-4 font-mono text-sm text-neutral-300'>
+                      <div className='flex items-center justify-between gap-2'>
+                        <span className='truncate'>{authToken}</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <p className='text-sm text-neutral-400'>
+                      No access token found
+                    </p>
+                  )}
+                  {identityToken ? (
+                    <div className='rounded-lg bg-neutral-950/50 p-4 font-mono text-sm text-neutral-300'>
+                      <div className='flex items-center justify-between gap-2'>
+                        <span className='truncate'>{identityToken}</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <p className='text-sm text-neutral-400'>
+                      No identity token found
+                    </p>
+                  )}
                 </div>
               </CardContent>
             </Card>
